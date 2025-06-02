@@ -1,4 +1,5 @@
 
+import sys
 import pygame
 from player import Player
 from asteroid import Asteroid
@@ -37,6 +38,11 @@ def main():
         screen.fill("black")
         dt = clock.tick(60) / 1000.0
         updatable.update(dt)
+        for asteroid in space_rocks_group:
+            if asteroid.collision(player_start):
+                print("Game over!")
+                sys.exit(0)
+            
         for draw in drawable:
             draw.draw(screen)
         pygame.display.flip()
